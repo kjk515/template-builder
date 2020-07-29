@@ -23,8 +23,12 @@
     "url": "https://github.com/kjk515/template-builder/issues"
   },
   "homepage": "https://github.com/kjk515/template-builder#readme",
-
   "engines": {
     "node": ">=8"
+  },
+  "dependencies": {
+    "commander": "^6.0.0",
+    "inquirer": "^7.3.3",
+    "chalk": "^4.1.0"
   }
 }

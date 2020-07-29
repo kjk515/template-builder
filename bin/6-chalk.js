@@ -2,6 +2,7 @@
 
 const program = require('commander');
 const inquirer = require('inquirer');
+const chalk = require('chalk');
 
 const fs = require('fs');
 const path = require('path');
@@ -38,21 +39,21 @@ const makeTemplate = (type, name, directory) => {
     const filePath = path.join(directory, `${name}.html`);
 
     if (exist(filePath)) {
-      console.error('이미 해당 파일이 존재합니다.');
+      console.error(chalk.bold.red('이미 해당 파일이 존재합니다.'));
     } else {
       fs.writeFileSync(filePath, htmlTemplate);
-      console.log(filePath, '생성 완료');
+      console.log(chalk.green(filePath, '생성 완료'));
     }
   } else if (type === 'express-router') {
     const pathToFile = path.join(directory, `${name}.js`);
     if (exist(pathToFile)) {
-      console.error('이미 해당 파일이 존재합니다.');
+      console.error(chalk.bold.red('이미 해당 파일이 존재합니다.'));
     } else {
       fs.writeFileSync(pathToFile, routerTemplate);
-      console.log(pathToFile, '생성 완료');
+      console.log(chalk.green(pathToFile, '생성 완료'));
     }
   } else {
-    console.error('html 또는 express-router 둘 중 하나를 입력하세요.');
+    console.error(chalk.bold.red('html 또는 express-router 둘 중 하나를 입력하세요.'));
   }
 };
 
@@ -61,36 +62,6 @@ let triggered = false;
 program
   .version('0.0.1', '-v, --version')
   .usage('[options]');
-
-program
-  .command('init')
-  .action(() => {
-    inquirer.prompt([{
-        type: 'list',
-        name: 'type',
-        message: '템플릿 종류를 선택하세요.',
-        choices: ['html', 'express-router'],
-      }, {
-        type: 'input',
-        name: 'name',
-        message: '파일의 이름을 입력하세요.',
-        default: 'index',
-      }, {
-        type: 'input',
-        name: 'directory',
-        message: '파일이 위치할 폴더의 경로를 입력하세요.',
-        default: '.',
-      }, {
-        type: 'confirm',
-        name: 'confirm',
-        message: '생성하시겠습니까?',
-      }])
-      .then((answers) => {
-        if (answers.confirm) {
-          makeTemplate(answers.type, answers.name, answers.directory);
-        }
-      })
-  })
 
 program
   .command('template <type>')
@@ -112,5 +83,33 @@ program
     triggered = true;
   });
 
-program.parse(process.argv);
+//program.parse(process.argv);
 
+if (!triggered) {
+  inquirer.prompt([{
+    type: 'list',
+    name: 'type',
+    message: '템플릿 종류를 선택하세요.',
+    choices: ['html', 'express-router'],
+  }, {
+    type: 'input',
+    name: 'name',
+    message: '파일의 이름을 입력하세요.',
+    default: 'index',
+  }, {
+    type: 'input',
+    name: 'directory',
+    message: '파일이 위치할 폴더의 경로를 입력하세요.',
+    default: '.',
+  }, {
+    type: 'confirm',
+    name: 'confirm',
+    message: '생성하시겠습니까?',
+  }])
+    .then((answers) => {
+      if (answers.confirm) {
+        makeTemplate(answers.type, answers.name, answers.directory);
+        console.log(chalk.rgb(128, 128, 128)('터미널을 종료합니다.'));
+      }
+    })
+}

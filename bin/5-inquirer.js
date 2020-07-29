@@ -56,8 +56,6 @@ const makeTemplate = (type, name, directory) => {
   }
 };
 
-let triggered = false;
-
 program
   .version('0.0.1', '-v, --version')
   .usage('[options]');
@@ -101,7 +99,6 @@ program
   .option('-d, --directory [path]', '생성 경로를 입력하세요', '.')
   .action((type, options) => {
     makeTemplate(type, options.filename, options.directory);
-    triggered = true;
   });
 
 program
@@ -109,8 +106,6 @@ program
   .action(() => {
     console.log('해당 명령어를 찾을 수 없습니다.');
     program.help();
-    triggered = true;
   });
 
 program.parse(process.argv);
-
