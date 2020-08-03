@@ -20,16 +20,19 @@ const exist = (path) => {
 }
 
 const makeDirectory = (dir) => {
-  const dirNames = path.relative('.', path.normalize(dir))
-    .split(path.sep).filter(p => !!p);
+  fs.mkdirSync(pathBuilder, { recursive: true });
 
-  dirNames.forEach((dirName, idx) => {
-    const pathBuilder = dirNames.slice(0, idx + 1).join(path.sep);
 
-    if (!exist(pathBuilder)) {
-      fs.mkdirSync(pathBuilder);
-    }
-  })
+  //const dirNames = path.relative('.', path.normalize(dir))
+  //  .split(path.sep).filter(p => !!p);
+  //
+  //dirNames.forEach((dirName, idx) => {
+  //  const pathBuilder = dirNames.slice(0, idx + 1).join(path.sep);
+  //
+  //  if (!exist(pathBuilder)) {
+  //    fs.mkdirSync(pathBuilder);
+  //  }
+  //})
 }
 
 const makeTemplate = () => {
