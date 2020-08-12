@@ -29,6 +29,7 @@
   "dependencies": {
     "commander": "^6.0.0",
     "inquirer": "^7.3.3",
-    "chalk": "^4.1.0"
+    "chalk": "^4.1.0",
+    "ncp": "^2.0.0"
   }
 }

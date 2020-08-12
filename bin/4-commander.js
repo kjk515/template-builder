@@ -46,14 +46,14 @@ program
   .usage('[options]');
 
 program
-  .command('template <type>')
-  .usage('--filename <filename> --path [path]')
+  .command('template <type> [filename] [directory]')
+  .usage('--filename <filename> --directory [directory]')
   .description('템플릿을 생성합니다.')
   .alias('tmpl')
   .option('-n, --filename <filename>', '파일명을 입력하세요', 'index')
-  .option('-d, --directory [path]', '생성 경로를 입력하세요', '.')
-  .action((type, options) => {
-    makeTemplate(type, options.filename, options.directory);
+  .option('-d, --directory [directory]', '생성 경로를 입력하세요', '.')
+  .action((type, filename, directory, options) => {
+    makeTemplate(type, filename || options.filename, directory || options.directory);
   });
 
 program
