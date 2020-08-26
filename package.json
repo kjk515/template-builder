@@ -1,14 +1,7 @@
 {
-  "name": "template-builder",
-  "version": "0.0.1",
+  "name": "@nara.drama/depot",
+  "version": "0.0.1-cli13",
   "description": "make a template for nara drama",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "bin": {
-    "template-builder": "bin/template-builder.js"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kjk515/template-builder.git"
@@ -23,13 +16,54 @@
     "url": "https://github.com/kjk515/template-builder/issues"
   },
   "homepage": "https://github.com/kjk515/template-builder#readme",
+  "publishConfig": {
+    "registry": "http://58.225.16.61:10001/repository/npm-private/"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "utils",
+    "template"
+  ],
+  "bin": {
+    "template-builder": "bin/template-builder.js"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.11.2",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "typescript": "^3.9.7",
+    "react-scripts": "3.4.3",
+    "chalk": "^4.1.0",
+    "commander": "^6.0.0",
+    "cross-spawn": "^7.0.3",
+    "inquirer": "^7.3.3",
+    "ncp": "^2.0.0",
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.1",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "eslint-config-nara": "^0.2.5"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^7.3.1",
+    "@types/ncp": "^2.0.4",
+    "@types/cross-spawn": "^6.0.2",
+    "husky": "^4.2.5"
+  },
   "engines": {
     "node": ">=8"
   },
-  "dependencies": {
-    "commander": "^6.0.0",
-    "inquirer": "^7.3.3",
-    "chalk": "^4.1.0",
-    "ncp": "^2.0.0"
+  "eslintConfig": {
+    "extends": "nara"
   }
 }
