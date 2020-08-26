@@ -1,0 +1,10 @@
+{
+  "presets": [["react-app", { "flow": false, "typescript": true, "absoluteRuntime": false }]],
+  "plugins": [
+    ["module-resolver", {
+      "alias": {
+        "~": "./src"
+      }
+    }]
+  ]
+}
