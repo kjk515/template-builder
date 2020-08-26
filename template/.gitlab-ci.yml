@@ -1,0 +1,84 @@
+variables:
+  SERVICE_NAME: "timecard"
+  DOCKER_IMAGE_TAG: "gcr.io/$GOOGLE_DEV_PROJECT_ID/$DRAMA/$SERVICE_NAME"
+stages:
+#  - build_jar
+  - build_storybook
+  - build_docker
+  - deploy_dev
+  - deploy_op
+#  - deploy_jar
+
+#jar_build:
+#  image: gradle:jdk8
+#  stage: build_jar
+#  script:
+#    - gradle clean build publish -c settings_gitlab.gradle
+#  artifacts:
+#    paths:
+#      - station-boot/build/libs/station-boot-0.3.0-SNAPSHOT.jar
+#  only:
+#    - master
+
+storybook_build:
+  image: node:10
+  stage: build_storybook
+  script:
+    - npm install
+    - npm run build-storybook
+  artifacts:
+    paths:
+      - storybook-static
+      - deploy/nginx.conf
+  only:
+    - master
+
+
+docker-build:
+  image: docker:latest
+  services:
+    - docker:dind
+  stage: build_docker
+  script:
+    - docker build -t "${DOCKER_IMAGE_TAG}":"${CI_PIPELINE_ID}" .
+    - echo "$GCP_NARA_DEV_KEY" > key.json
+    - cat key.json | docker login -u _json_key --password-stdin https://gcr.io
+    #    — docker login -u _json_key -p "$(cat key.json)" https://gcr.io
+    - docker push "${DOCKER_IMAGE_TAG}":"${CI_PIPELINE_ID}"
+  only:
+    - master
+
+gke_deploy_dev:
+  image: google/cloud-sdk
+  stage: deploy_dev
+  script:
+    - echo "$GCP_NARA_DEV_KEY" > key.json
+    - cat key.json
+    - gcloud auth activate-service-account --key-file key.json
+    - gcloud config set compute/zone $COMPUTE_ZONE
+    - gcloud config set project $GOOGLE_DEV_PROJECT_ID
+    - gcloud container clusters get-credentials $CLUSTER_ID
+    - kubectl apply -f deploy/service.yml
+    - sed -e "s/IMAGE_TAG_HOLDER/$(echo $DOCKER_IMAGE_TAG | sed 's/\//\\\//g'):$CI_PIPELINE_ID/g" deploy/deploy-template.yml > deploy.yml
+    - kubectl apply -f deploy.yml --record
+  artifacts:
+    paths:
+      - deploy.yml
+  only:
+    - master
+
+gke_deploy_op:
+  image: google/cloud-sdk
+  stage: deploy_op
+  when: manual
+  script:
+    - echo "$GCP_NARA_OPS_KEY" > key.json
+    - cat key.json
+    - gcloud auth activate-service-account --key-file key.json
+    - gcloud config set compute/zone $COMPUTE_ZONE
+    - gcloud config set project $GOOGLE_OPS_PROJECT_ID
+    - gcloud container clusters get-credentials $CLUSTER_ID
+    - kubectl apply -f deploy/service.yml
+    - kubectl apply -f deploy.yml --record
+  only:
+    - master

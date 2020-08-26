@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: timecard-storybook
+  labels:
+    app: timecard-storybook
+    group: nara-drama
+    version: 0.3.0-snapshot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: timecard-storybook
+      group: nara-drama
+      version: 0.3.0-snapshot
+  template:
+    metadata:
+      labels:
+        app: timecard-storybook
+        group: nara-drama
+        version: 0.3.0-snapshot
+      annotations:
+        sidecar.istio.io/inject: "true"
+    spec:
+      serviceAccountName: nara-service-account
+      containers:
+      - name: timecard-storybook
+        image: IMAGE_TAG_HOLDER
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 80
+

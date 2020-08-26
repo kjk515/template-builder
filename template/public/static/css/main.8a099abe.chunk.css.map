@@ -1,0 +1,1 @@
+{"version":3,"sources":["styling-page.css"],"names":[],"mappings":"AAAA,cACI,WACJ,CACA,eACI,iBACJ","file":"main.8a099abe.chunk.css","sourcesContent":[".ui.container {\n    margin : 1rem;\n}\n.ui.menu .item{\n    font-size : 0.875rem;\n}\n"]}

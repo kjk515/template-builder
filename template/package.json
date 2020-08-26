@@ -1,0 +1,54 @@
+{
+  "name": "@nara.drama/sample",
+  "version": "0.0.1",
+  "description": "Nara Drama Sample",
+  "author": "Nextree",
+  "module": "lib/index.js",
+  "sideEffects": false,
+  "types": "./lib/@types/index.d.ts",
+  "files": [
+    "lib",
+    "public"
+  ],
+  "publishConfig": {
+    "registry": "http://58.225.16.61:10001/repository/npm-private/"
+  },
+  "scripts": {
+    "storybook": "start-storybook -s public -p 4000",
+    "build-storybook": "build-storybook -s public",
+    "build-lib": "template-builder build-lib",
+    "sonarqube": "node deploy/sonar-scanner.js"
+  },
+  "dependencies": {
+    "@nara.platform/accent": "0.3.5",
+    "@nara.platform/react-ui": "0.1.5",
+    "react": "^16.13.0",
+    "mobx": "^4.15.4",
+    "mobx-react": "^6.2.2",
+    "react-datepicker": "^2.9.6"
+  },
+  "devDependencies": {
+    "@nara.platform/storybook": "^0.0.22",
+    "@storybook/react": "^5.3.17",
+    "sonarqube-scanner": "^2.7.0",
+    "@types/node": "^13.9.1",
+    "@types/react": "^16.9.23",
+    "@types/react-datepicker": "^2.9.3",
+    "@nara.drama/depot": "0.0.1-cli13"
+  },
+  "eslintConfig": {
+    "extends": "nara"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

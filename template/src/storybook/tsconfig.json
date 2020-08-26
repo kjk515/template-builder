@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "isolatedModules": false,
+    "jsx": "react",
+    "baseUrl": "../../src",
+    "paths": {
+      "~/*": ["*"],
+      "@nara.drama/timecard": ["lib"]
+    }
+  },
+  "include": [
+    "../**/*"
+  ],
+  "exclude": [
+    "../../node_modules"
+  ]
+}
