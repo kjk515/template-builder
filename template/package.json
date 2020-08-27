@@ -17,6 +17,7 @@
     "storybook": "start-storybook -s public -p 4000",
     "build-storybook": "build-storybook -s public",
     "build-lib": "template-builder build-lib",
+    "build-app": "template-builder build-app",
     "sonarqube": "node deploy/sonar-scanner.js"
   },
   "dependencies": {
@@ -28,17 +29,16 @@
     "react-datepicker": "^2.9.6"
   },
   "devDependencies": {
-    "@nara.platform/storybook": "^0.0.22",
-    "@storybook/react": "^5.3.17",
     "sonarqube-scanner": "^2.7.0",
     "@types/node": "^13.9.1",
     "@types/react": "^16.9.23",
     "@types/react-datepicker": "^2.9.3",
-    "@nara.drama/depot": "0.0.1-cli13"
+    "@nara.drama/depot": "0.0.1-cli26"
   },
   "eslintConfig": {
     "extends": "nara"
   },
+  "config-overrides-path": "node_modules/@nara.drama/depot/utils/config-overrides.js",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -50,5 +50,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "eslint src/**/*.{js,mjs,jsx,ts,tsx} --no-error-on-unmatched-pattern"
+    }
   }
 }

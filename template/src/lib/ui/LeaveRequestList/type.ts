@@ -1,1 +1,1 @@
-export { default as ClickColumnParams } from './model/ClickColumnParams';
+export type ClickColumnParams = import('./model/ClickColumnParams').default;

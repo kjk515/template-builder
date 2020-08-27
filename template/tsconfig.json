@@ -1,35 +1,3 @@
 {
-  "compilerOptions": {
-    "target": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "experimentalDecorators": true,
-    "noImplicitAny": true,
-    "allowSyntheticDefaultImports": true,
-    "allowJs": false,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "noEmit": true,
-    "baseUrl": "src",
-    "paths": {
-      "~/*": ["*"],
-      "@nara.drama/timecard": ["lib"]
-    }
-  },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "extends": "@nara.drama/depot/utils/tsconfig.base.json"
 }
