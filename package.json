@@ -1,6 +1,6 @@
 {
   "name": "@nara.drama/depot",
-  "version": "0.0.1-cli26",
+  "version": "0.0.1-cli6",
   "description": "make a template for nara drama",
   "repository": {
     "type": "git",
@@ -47,8 +47,8 @@
     "@types/react-dom": "^16.9.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "typescript": "^3.9.7",
     "react-app-rewired": "2.1.6",
+    "typescript": "^3.9.7",
     "babel-plugin-module-resolver": "^4.0.0",
     "eslint-config-nara": "^0.2.5",
     "husky": "^4.2.5"

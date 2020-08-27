@@ -1,16 +1,22 @@
 import spawn from 'cross-spawn';
+import chalk from 'chalk';
 
 
-export default function buildApp() {
+export default function start() {
 
   runStart();
 }
 
 function runStart() {
+  console.log(chalk.blue('Starting App...'));
   const startResult = spawn.sync('react-app-rewired', ['start']);
 
-  console.log('성공!!!: ', startResult.output[1].toString());
-  console.log('실패!!!: ', startResult.output[2].toString());
+  if (startResult.status === 0) {
+    console.log(startResult.output[1].toString());
+  }
+  else {
+    console.log(startResult.output[2].toString());
+  }
 
   return startResult;
 }

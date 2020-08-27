@@ -25,15 +25,12 @@
     "@nara.platform/react-ui": "0.1.5",
     "react": "^16.13.0",
     "mobx": "^4.15.4",
-    "mobx-react": "^6.2.2",
-    "react-datepicker": "^2.9.6"
+    "mobx-react": "^6.2.2"
   },
   "devDependencies": {
     "sonarqube-scanner": "^2.7.0",
     "@types/node": "^13.9.1",
-    "@types/react": "^16.9.23",
-    "@types/react-datepicker": "^2.9.3",
-    "@nara.drama/depot": "0.0.1-cli26"
+    "@types/react": "^16.9.23"
   },
   "eslintConfig": {
     "extends": "nara"

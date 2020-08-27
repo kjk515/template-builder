@@ -1,4 +1,5 @@
 import spawn from 'cross-spawn';
+import chalk from 'chalk';
 
 
 export default function buildApp() {
@@ -12,10 +13,17 @@ export default function buildApp() {
 }
 
 function runBuild() {
+  console.log(chalk.blue('Building App...'));
   const buildResult = spawn.sync('react-app-rewired', ['build']);
 
-  console.log('성공!!!: ', buildResult.output[1].toString());
-  console.log('실패!!!: ', buildResult.output[2].toString());
+  if (buildResult.status === 0) {
+    console.log(chalk.green('Build Completed!'));
+  }
+  else {
+    console.log(chalk.bold.red('Build Failed!'));
+    console.log(buildResult.output[1].toString());
+    console.log(buildResult.output[2].toString());
+  }
 
   return buildResult;
 }

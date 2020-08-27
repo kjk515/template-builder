@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import program from 'commander';
 
-import packageJson from '../package.json';
+import packageJson from '@nara.drama/depot/package.json';
 import buildLib from './scripts/build-lib';
 import buildApp from './scripts/build-app';
 import create from './scripts/create';
@@ -10,8 +10,27 @@ import start from './scripts/start';
 
 
 const resolveApp = (endPath: string) => path.resolve(process.cwd(), path.isAbsolute(endPath) ? path.relative('/', endPath) : endPath);
-const resolveOwn = (endPath: string) => path.resolve(__dirname, '..', path.isAbsolute(endPath) ? path.relative('/', endPath) : endPath);
 
+program
+  .command('build-lib')
+  .description('라이브러리 빌드를 실행합니다.')
+  .action(() => {
+    buildLib();
+  });
+
+program
+  .command('build-app')
+  .description('앱 빌드를 실행합니다.')
+  .action(() => {
+    buildApp();
+  });
+
+program
+  .command('start')
+  .description('로컬 서버를 실행합니다.')
+  .action(() => {
+    start();
+  });
 
 // template-builder create appName ./test
 // template-builder add service /lib/model/test /lib/service/test
@@ -38,27 +57,6 @@ program
 
     fs.mkdirSync(resolveApp(root), { recursive: true });
     fs.writeFileSync(path.join(resolveApp(root), `TestService.ts`), 'service');
-  });
-
-program
-  .command('build-lib')
-  .description('라이브러리 빌드를 실행합니다.')
-  .action(() => {
-    buildLib();
-  });
-
-program
-  .command('build-app')
-  .description('앱 빌드를 실행합니다.')
-  .action(() => {
-    buildApp();
-  });
-
-program
-  .command('start')
-  .description('로컬 서버를 실행합니다.')
-  .action(() => {
-    start();
   });
 
 program.parse(process.argv);
