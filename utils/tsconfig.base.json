@@ -20,12 +20,12 @@
     "experimentalDecorators": true,
     "noImplicitAny": true,
     "allowJs": false,
-    "baseUrl": "src",
+    "baseUrl": "../../../../src",
     "paths": {
       "~/*": ["*"]
     }
   },
   "include": [
-    "src"
+    "../../../../src"
   ]
 }
