@@ -45,7 +45,7 @@ function runLint() {
 
 function runTypes() {
   console.log(chalk.blue('Emitting Types...'));
-  const typesResult = spawn.sync('ttsc', ['-p', 'src/lib/tsconfig.json']);
+  const typesResult = spawn.sync('tsc', ['-p', 'src/lib/tsconfig.json']);
 
   if (typesResult.status === 0) {
     console.log(chalk.green('Types have been emitted!'));
@@ -57,6 +57,7 @@ function runTypes() {
   }
 
   // TODO: @types 내부의 ~/ path resolve가 필요하다면 아래의 내용 추가
+  //    ttsc 로 변경,
   //    "ttypescript": "^1.5.11",
   //    "typescript-transform-paths": "^2.0.0"
   //    "plugins": [
