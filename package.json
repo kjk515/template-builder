@@ -1,6 +1,6 @@
 {
   "name": "@nara.drama/depot",
-  "version": "0.0.1-cli13",
+  "version": "0.0.1-cli26",
   "description": "make a template for nara drama",
   "repository": {
     "type": "git",
@@ -32,7 +32,12 @@
     "build": "rm -rf dist && tsc"
   },
   "dependencies": {
-    "@babel/runtime": "^7.11.2",
+    "chalk": "^4.1.0",
+    "commander": "^6.0.0",
+    "cross-spawn": "^7.0.3",
+    "inquirer": "^7.3.3",
+    "ncp": "^2.0.0",
+    "react-scripts": "3.4.3",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -43,27 +48,25 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "typescript": "^3.9.7",
-    "react-scripts": "3.4.3",
-    "chalk": "^4.1.0",
-    "commander": "^6.0.0",
-    "cross-spawn": "^7.0.3",
-    "inquirer": "^7.3.3",
-    "ncp": "^2.0.0",
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.11.1",
+    "react-app-rewired": "2.1.6",
     "babel-plugin-module-resolver": "^4.0.0",
-    "eslint-config-nara": "^0.2.5"
+    "eslint-config-nara": "^0.2.5",
+    "husky": "^4.2.5"
   },
   "devDependencies": {
     "@types/inquirer": "^7.3.1",
     "@types/ncp": "^2.0.4",
-    "@types/cross-spawn": "^6.0.2",
-    "husky": "^4.2.5"
+    "@types/cross-spawn": "^6.0.2"
   },
   "engines": {
     "node": ">=8"
   },
   "eslintConfig": {
     "extends": "nara"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "eslint src/**/*.{js,mjs,jsx,ts,tsx} --no-error-on-unmatched-pattern"
+    }
   }
 }

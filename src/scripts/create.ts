@@ -1,11 +1,12 @@
 import path from 'path';
-import { ncp } from 'ncp'
+import { ncp } from 'ncp';
 import spawn from 'cross-spawn';
+
 
 const resolveApp = (endPath: string) => path.resolve(process.cwd(), path.isAbsolute(endPath) ? path.relative('/', endPath) : endPath);
 const resolveOwn = (endPath: string) => path.resolve(__dirname, '../../..', path.isAbsolute(endPath) ? path.relative('/', endPath) : endPath);
 
-export default function create (appName: string, directory: string) {
+export default function create(appName: string, directory: string) {
 
   const src = resolveOwn('template');
   const tgt = path.resolve(resolveApp(directory), appName);
@@ -16,7 +17,7 @@ export default function create (appName: string, directory: string) {
   // 있으면 덮어씀
   ncp(src, tgt, (error) => {
     if (error) {
-      console.log(error)
+      console.log(error);
       return;
     }
 
@@ -26,8 +27,9 @@ export default function create (appName: string, directory: string) {
 
 function runInstall(appRoot: string) {
   // TODO
-  spawn.sync('cd', [appRoot])
+  spawn.sync('cd', [appRoot]);
   const installResult = spawn.sync('yarn');
+
   console.log('성공!!!: ', installResult.output[1].toString());
   console.log('실패!!!: ', installResult.output[2].toString());
 

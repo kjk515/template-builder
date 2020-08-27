@@ -4,7 +4,9 @@ import program from 'commander';
 
 import packageJson from '../package.json';
 import buildLib from './scripts/build-lib';
+import buildApp from './scripts/build-app';
 import create from './scripts/create';
+
 
 const resolveApp = (endPath: string) => path.resolve(process.cwd(), path.isAbsolute(endPath) ? path.relative('/', endPath) : endPath);
 const resolveOwn = (endPath: string) => path.resolve(__dirname, '..', path.isAbsolute(endPath) ? path.relative('/', endPath) : endPath);
@@ -44,4 +46,11 @@ program
     buildLib();
   });
 
-program.parse(process.argv)
+program
+  .command('build-app')
+  .description('앱 빌드를 실행합니다.')
+  .action(() => {
+    buildApp();
+  });
+
+program.parse(process.argv);
