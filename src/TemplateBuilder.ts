@@ -6,6 +6,7 @@ import packageJson from '../package.json';
 import buildLib from './scripts/build-lib';
 import buildApp from './scripts/build-app';
 import create from './scripts/create';
+import start from './scripts/start';
 
 
 const resolveApp = (endPath: string) => path.resolve(process.cwd(), path.isAbsolute(endPath) ? path.relative('/', endPath) : endPath);
@@ -51,6 +52,13 @@ program
   .description('앱 빌드를 실행합니다.')
   .action(() => {
     buildApp();
+  });
+
+program
+  .command('start')
+  .description('로컬 서버를 실행합니다.')
+  .action(() => {
+    start();
   });
 
 program.parse(process.argv);
