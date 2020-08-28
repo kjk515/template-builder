@@ -45,7 +45,7 @@ function runLint() {
 
 function runTypes() {
   console.log(chalk.blue('Emitting Types...'));
-  const typesResult = spawn.sync('tsc', ['-p', 'src/lib/tsconfig.json']);
+  const typesResult = spawn.sync('ttsc', ['-p', 'src/lib/tsconfig.json']);
 
   if (typesResult.status === 0) {
     console.log(chalk.green('Types have been emitted!'));
@@ -55,17 +55,6 @@ function runTypes() {
     console.log(typesResult.output[1].toString());
     console.log(typesResult.output[2].toString());
   }
-
-  // TODO: @types 내부의 ~/ path resolve가 필요하다면 아래의 내용 추가
-  //    ttsc 로 변경,
-  //    "ttypescript": "^1.5.11",
-  //    "typescript-transform-paths": "^2.0.0"
-  //    "plugins": [
-  //      {
-  //        "transform": "typescript-transform-paths"
-  //      }
-  //    ]
-  //  단, "emitDeclarationOnly": true 일 경우 변환해주지 않음
 
   return typesResult;
 }
@@ -80,7 +69,7 @@ function runBabel() {
   ]);
 
   if (babelResult.status === 0) {
-    console.log(chalk.green('Compile Completed!'));
+    console.log(chalk.green('Compiled Successfully!'));
   }
   else {
     console.log(chalk.bold.red('Compile Failed!'));
