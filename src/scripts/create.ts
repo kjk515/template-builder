@@ -4,8 +4,8 @@ import os from 'os';
 import { ncp } from 'ncp';
 import spawn from 'cross-spawn';
 import chalk from 'chalk';
-import packageJson from '@nara.drama/depot/package.json';
-import appPackageJson from '@nara.drama/depot/template/package.json';
+import packageJson from '../../package.json';
+import appPackageJson from '../../template/package.json';
 
 
 const resolveApp = (endPath: string) => path.resolve(process.cwd(), path.isAbsolute(endPath) ? path.relative('/', endPath) : endPath);

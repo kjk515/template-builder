@@ -19,11 +19,7 @@
     "experimentalDecorators": true,
     "noImplicitAny": true,
     "allowJs": false,
-    "outDir": "dist",
-    "baseUrl": ".",
-    "paths": {
-      "@nara.drama/depot/*": ["*"]
-    }
+    "outDir": "dist"
   },
   "include": [
     "src"
