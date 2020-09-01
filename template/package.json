@@ -16,6 +16,7 @@
   "scripts": {
     "storybook": "start-storybook -s public -p 4000",
     "build-storybook": "build-storybook -s public",
+    "start": "template-builder start",
     "build-lib": "template-builder build-lib",
     "build-app": "template-builder build-app",
     "sonarqube": "node deploy/sonar-scanner.js"
@@ -35,7 +36,6 @@
   "eslintConfig": {
     "extends": "nara"
   },
-  "config-overrides-path": "node_modules/@nara.drama/depot/utils/config-overrides.js",
   "browserslist": {
     "production": [
       ">0.2%",

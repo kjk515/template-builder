@@ -1,0 +1,3 @@
+{
+  "extends": "@nara.drama/depot/config/.babelrc"
+}

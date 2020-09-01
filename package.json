@@ -1,6 +1,6 @@
 {
   "name": "@nara.drama/depot",
-  "version": "0.0.1-cli9",
+  "version": "0.0.1-cli14",
   "description": "make a template for nara drama",
   "repository": {
     "type": "git",
@@ -22,7 +22,7 @@
   "files": [
     "bin",
     "dist",
-    "utils",
+    "config",
     "template"
   ],
   "bin": {

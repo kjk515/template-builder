@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { execSync } from 'child_process';
 import os from 'os';
 import { ncp } from 'ncp';
 import spawn from 'cross-spawn';
@@ -16,7 +17,7 @@ export default function create(appName: string, directory: string) {
   const src = resolveOwn('template');
   const tgt = path.join(resolveApp(directory), appName);
 
-  console.log(chalk.blue('Making Template...'));
+  console.log(chalk.blue('Creating Template...'));
   // 있으면 덮어씀
   ncp(src, tgt, (error) => {
     if (error) {
@@ -25,7 +26,8 @@ export default function create(appName: string, directory: string) {
     }
 
     addDependencies(tgt);
-    console.log(chalk.green('Template has been made!'));
+    console.log(chalk.green('Template has been created!'));
+    console.log();
 
     const installResult = runInstall(tgt);
 
@@ -44,7 +46,16 @@ function addDependencies(appRoot: string) {
 function runInstall(appRoot: string) {
   console.log(chalk.blue('Install Dependencies...'));
 
-  const installResult = spawn.sync('yarn', ['--cwd', appRoot]);
+  let installResult;
+
+  if (useYarn()) {
+    installResult = spawn.sync('yarn', ['--cwd', appRoot]);
+  }
+  else {
+    spawn.sync('mkdir', ['-p', path.join(appRoot, 'node_modules')]);
+    installResult = spawn.sync('npm', ['install', '--prefix', appRoot]);
+  }
+
 
   if (installResult.status === 0) {
     console.log(chalk.green('Install Completed!'));
@@ -80,4 +91,14 @@ function consoleForGuide(appRoot: string, appName: string) {
   console.log(`  ${chalk.cyan(`yarn start`)}`);
   console.log();
   console.log('Happy hacking!');
+}
+
+function useYarn() {
+  try {
+    execSync('yarnpkg --version', { stdio: 'ignore' });
+    return true;
+  }
+  catch (e) {
+    return false;
+  }
 }

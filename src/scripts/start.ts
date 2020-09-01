@@ -4,19 +4,13 @@ import chalk from 'chalk';
 
 export default function start() {
 
+  process.env.CI = 'false';
+  process.env.EXTEND_ESLINT = 'true';
+
   runStart();
 }
 
 function runStart() {
   console.log(chalk.blue('Starting App...'));
-  const startResult = spawn.sync('react-app-rewired', ['start']);
-
-  if (startResult.status === 0) {
-    console.log(startResult.output[1].toString());
-  }
-  else {
-    console.log(startResult.output[2].toString());
-  }
-
-  return startResult;
+  spawn('react-app-rewired', ['start'], { stdio: 'inherit' });
 }

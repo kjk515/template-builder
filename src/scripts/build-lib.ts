@@ -33,6 +33,7 @@ function runLint() {
 
   if (lintResult.status === 0) {
     console.log(chalk.green('Lint Completed!'));
+    console.log();
   }
   else {
     console.log(chalk.bold.red('Lint Failed!'));
@@ -49,6 +50,7 @@ function runTypes() {
 
   if (typesResult.status === 0) {
     console.log(chalk.green('Types have been emitted!'));
+    console.log();
   }
   else {
     console.log(chalk.bold.red('Emitting Types Failed!'));
@@ -65,11 +67,12 @@ function runBabel() {
     'src/lib',
     '-d', 'lib',
     '--extensions', '.js,.mjs,.jsx,.ts,.tsx',
-    '--config-file', resolveOwn('utils/.babelrc'),
+    //'--config-file', resolveOwn('config/.babelrc'),
   ]);
 
   if (babelResult.status === 0) {
     console.log(chalk.green('Compiled Successfully!'));
+    console.log();
   }
   else {
     console.log(chalk.bold.red('Compile Failed!'));
