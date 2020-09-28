@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "Nara Drama Sample",
   "author": "Nextree",
-  "module": "lib/index.js",
+  "module": "lib/esm/index.js",
+  "main": "lib/index-cjs.js",
   "sideEffects": false,
   "types": "./lib/@types/index.d.ts",
   "files": [

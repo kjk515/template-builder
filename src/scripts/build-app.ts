@@ -7,7 +7,7 @@ export default function buildApp() {
   process.env.CI = 'false';
   process.env.EXTEND_ESLINT = 'true';
 
-  spawn.sync('rm', ['-rf', 'build']);
+  spawn.sync('rm', ['-rf', 'dist']);
 
   runBuild();
 }

@@ -9,6 +9,8 @@ export default function buildLib() {
 
   process.env.BABEL_ENV = 'production';
   process.env.NODE_ENV = 'production';
+  process.env.CI = 'false';
+  process.env.EXTEND_ESLINT = 'true';
 
   spawn.sync('rm', ['-rf', 'lib']);
 
@@ -24,7 +26,13 @@ export default function buildLib() {
     return;
   }
 
-  runBabel();
+  const babelResult = runBabel();
+
+  if (babelResult.status !== 0) {
+    return;
+  }
+
+  runBuild();
 }
 
 function runLint() {
@@ -65,7 +73,7 @@ function runBabel() {
   console.log(chalk.blue('Compiling with Babel...'));
   const babelResult = spawn.sync('babel', [
     'src/lib',
-    '-d', 'lib',
+    '-d', 'lib/esm',
     '--extensions', '.js,.mjs,.jsx,.ts,.tsx',
     //'--config-file', resolveOwn('config/.babelrc'),
   ]);
@@ -81,4 +89,23 @@ function runBabel() {
   }
 
   return babelResult;
+}
+
+function runBuild() {
+
+  process.env.LIBRARY_TARGET = 'commonjs2';
+
+  console.log(chalk.blue('Building Library...'));
+  const buildResult = spawn.sync('react-app-rewired', ['build']);
+
+  if (buildResult.status === 0) {
+    console.log(chalk.green('Build Completed!'));
+  }
+  else {
+    console.log(chalk.bold.red('Build Failed!'));
+    console.log(buildResult.output[1].toString());
+    console.log(buildResult.output[2].toString());
+  }
+
+  return buildResult;
 }
