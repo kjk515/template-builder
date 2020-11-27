@@ -1,6 +1,6 @@
 {
   "name": "@nara.drama/depot",
-  "version": "0.0.1-cli16",
+  "version": "0.0.1-cli18",
   "description": "make a template for nara drama",
   "repository": {
     "type": "git",
@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/kjk515/template-builder#readme",
   "publishConfig": {
-    "registry": "http://58.225.16.61:10001/repository/npm-private/"
+    "registry": "http://58.225.16.61/repository/npm-private/"
   },
   "files": [
     "bin",

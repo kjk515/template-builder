@@ -26,13 +26,13 @@ export default function buildLib() {
     return;
   }
 
-  const babelResult = runBabel();
+  const esmBabelResult = runEsmBabel();
 
-  if (babelResult.status !== 0) {
+  if (esmBabelResult.status !== 0) {
     return;
   }
 
-  runBuild();
+  runCommonjsBabel();
 }
 
 function runLint() {
@@ -69,8 +69,11 @@ function runTypes() {
   return typesResult;
 }
 
-function runBabel() {
-  console.log(chalk.blue('Compiling with Babel...'));
+function runEsmBabel() {
+
+  process.env.LIBRARY_TARGET = 'ESM';
+
+  console.log(chalk.blue('Compiling ESM with Babel...'));
   const babelResult = spawn.sync('babel', [
     'src/lib',
     '-d', 'lib/esm',
@@ -91,21 +94,27 @@ function runBabel() {
   return babelResult;
 }
 
-function runBuild() {
+function runCommonjsBabel() {
 
-  process.env.LIBRARY_TARGET = 'commonjs2';
+  process.env.LIBRARY_TARGET = 'CJS';
 
-  console.log(chalk.blue('Building Library...'));
-  const buildResult = spawn.sync('react-app-rewired', ['build']);
+  console.log(chalk.blue('Compiling CJS with Babel...'));
+  const babelResult = spawn.sync('babel', [
+    'src/lib',
+    '-d', 'lib/cjs',
+    '--extensions', '.js,.mjs,.jsx,.ts,.tsx',
+    //'--config-file', resolveOwn('config/.babelrc'),
+  ]);
 
-  if (buildResult.status === 0) {
-    console.log(chalk.green('Build Completed!'));
+  if (babelResult.status === 0) {
+    console.log(chalk.green('Compiled Successfully!'));
+    console.log();
   }
   else {
-    console.log(chalk.bold.red('Build Failed!'));
-    console.log(buildResult.output[1].toString());
-    console.log(buildResult.output[2].toString());
+    console.log(chalk.bold.red('Compile Failed!'));
+    console.log(babelResult.output[1].toString());
+    console.log(babelResult.output[2].toString());
   }
 
-  return buildResult;
+  return babelResult;
 }

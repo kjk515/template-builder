@@ -4,7 +4,7 @@
   "description": "Nara Drama Sample",
   "author": "Nextree",
   "module": "lib/esm/index.js",
-  "main": "lib/index-cjs.js",
+  "main": "lib/cjs/index.js",
   "sideEffects": false,
   "types": "./lib/@types/index.d.ts",
   "files": [

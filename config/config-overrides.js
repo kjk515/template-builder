@@ -15,16 +15,14 @@ module.exports = function override(config, env) {
     [process.env.npm_package_name]: path.resolve(appSrcPath, 'lib'),
   };
 
-  config.output.path = resolveApp('dist');
-
-  if (process.env.LIBRARY_TARGET) {
-    config.entry = './src/lib/index.ts';
-    config.output = {
-      libraryTarget: process.env.LIBRARY_TARGET,
-      path: resolveApp('lib'),
-      filename: `index-${process.env.LIBRARY_TARGET}.js`,
-    };
-  }
+  //if (process.env.LIBRARY_TARGET) {
+  //  config.entry = './src/lib/index.ts';
+  //  config.output = {
+  //    libraryTarget: process.env.LIBRARY_TARGET,
+  //    //path: resolveApp('lib'),
+  //    filename: `index-${process.env.LIBRARY_TARGET}.js`,
+  //  };
+  //}
 
   //config.plugins.push(
   //  new ForkTsCheckerWebpackPlugin({
