@@ -1,9 +1,7 @@
+const baseConfig = require('@nara.drama/depot/config/config-overrides.js');
 
-const baseOverride = require('@nara.drama/depot/config/config-overrides.js');
 
-
-module.exports = function override(baseConfig, env) {
-  const config = baseOverride(baseConfig, env);
-
-  return config;
+module.exports = {
+  webpack: baseConfig.webpack,
+  paths: baseConfig.paths,
 };
